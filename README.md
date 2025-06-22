@@ -30,7 +30,7 @@ You can also get these by using the provided [flake.nix](./flake.nix) file. [Rea
 
 ### Download Virtual Machine Image
 
-Download the [VM file](https://syddanskuni-my.sharepoint.com.mcas.ms/personal/mauro_imada_sdu_dk/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fmauro%5Fimada%5Fsdu%5Fdk%2FDocuments%2Fshared%2Fteaching%5Fshared%2F2025%5FBADM500%2Falpine%5FVM%2Eqcow2&parent=%2Fpersonal%2Fmauro%5Fimada%5Fsdu%5Fdk%2FDocuments%2Fshared%2Fteaching%5Fshared%2F2025%5FBADM500&ga=1) and copy it to the root folder of the project.
+Download the [VM file](https://drive.google.com/file/d/15oGi7wfHXGdRP8Wk3V1T9C3243ypQxHd/view?usp=sharing) and copy it to the root folder of the project.
 
 ### Run CTF Challenges
 
