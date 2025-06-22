@@ -2,9 +2,9 @@
 
 Bachelor thesis project for the [BADM500 course](https://odin.sdu.dk/sitecore/index.php?a=searchfagbesk&internkode=badm500&lang=en) (2025) at the [University of Southern Denmark](https://www.sdu.dk/en), [Department of Mathematics and Computer Science](https://www.sdu.dk/en/om-sdu/institutter-centre/imada_matematik_og_datalogi).
 
-The project explores Capture The Flag (CTF) challenges and how they can help educate people about subjects in computer science and cyber security.
+The project explores Capture the Flag (CTF) challenges and how they can help educate people about subjects in computer science and cybersecurity.
 
-The challenges was created for the CTF platform: https://ctf.jacopomauro.com/.
+The challenges were created for the CTF platform: https://github.com/KianBankeLarsen/CTF-Platform.
 
 ## Challenges
 
@@ -60,19 +60,19 @@ Exit the VM by pressing `Ctrl-a` followed by `x`.
 
 ### Failure Starting HTTP Server
 
-If something fails, then the Python HTTP server might not shutdown properly. You will need to kill the process yourself, which can be done like this:
+If something fails, then the Python HTTP server might not shut down properly. You will need to kill the process yourself, which can be done like this:
 
 ```bash
 # see processes
 ps
 
-# find python process and copy its pid
+# find the Python process and copy its PID
 
 # kill the process
 kill <pid>
 ```
 
-You can now try and run the CTF challenge again.
+You can now try and rerun the CTF challenge.
 
 ## Creating New Challenges
 
