@@ -1,0 +1,27 @@
+ZIP_NAME := 'challenge.zip'
+SRC_DIR := 'src'
+HANDOUT_DIR := 'handout'
+SOLUTION_DIR := 'solution'
+OUT_DIR := 'out'
+TARGET := OUT_DIR + '/' + ZIP_NAME
+
+# show help menu
+default:
+	@just --list
+
+# run challenge locally
+dev:
+	@cd {{SRC_DIR}} && docker compose -f compose.yaml up --build
+
+# bundle the CTF challenge
+bundle: clean
+	@mkdir -p {{OUT_DIR}}
+	@cd {{SRC_DIR}} && git ls-files --others --cached --exclude-standard | zip -@r ../{{TARGET}}
+
+# run solution locally
+solution:
+	@cd {{SOLUTION_DIR}} && docker compose up --build
+
+# cleanup
+clean:
+	rm -vr {{OUT_DIR}}

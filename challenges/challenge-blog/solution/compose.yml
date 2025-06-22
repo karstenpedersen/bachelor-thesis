@@ -1,0 +1,6 @@
+services:
+  solver:
+    build: .
+    container_name: solver
+    environment:
+      DOMAIN: host.docker.internal

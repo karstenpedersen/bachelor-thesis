@@ -1,0 +1,9 @@
+services:
+  solver:
+    build: .
+    network_mode: host
+    environment:
+      DOMAIN: "localhost"
+      SSH_SERVICE_INTERNAL_URL: "localhost"
+      HTTP_PORT: 8080
+      SSH_PORT: 8022

@@ -1,0 +1,252 @@
+:root {
+  /* Colors */
+  --clr-light: #EEF0F4;
+  --clr-gray: #D7D9DD;
+  --clr-dark-gray: #262626;
+  --clr-dark: #000000;
+  --clr-bg: var(--clr-light);
+  --clr-fg: var(--clr-dark);
+  --clr-main: #112D44;
+  --clr-main-fg: var(--clr-light);
+  --clr-main-dark: #061A2A;
+  --clr-primary: #BEEBFC;
+  --clr-primary-fg: var(--clr-dark);
+
+  --header-height: 4rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+body {
+  color: var(--clr-fg);
+  background: var(--clr-bg);
+  line-height: 1.5;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3 {
+  overflow-wrap: break-word;
+}
+
+p {
+  font-size: 1.125rem;
+}
+
+h1, h2, h3 {
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--clr-primary);
+  }
+}
+
+section {
+  padding-block: 1.5rem;
+  padding-inline: min(5vw, 4rem);
+
+  &.gray {
+    background: var(--clr-gray);
+    color: var(--clr-dark);
+  }
+
+  &.main {
+    background: var(--clr-main);
+    color: var(--clr-main-fg);
+  }
+
+  &.white{
+    max-width: 80rem;
+    margin: auto;
+  }
+
+  &.center {
+    text-align: center;
+  }
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  height: var(--header-height);
+  background: var(--clr-main);
+  color: var(--clr-main-fg);
+  padding-inline: min(5vw, 4rem);
+
+  nav {
+    height: 100%;
+
+    ul {
+      display: flex;
+      flex-direction: row;
+      gap: 2rem;
+      height: 100%;
+
+      li {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+      }
+    }
+  }
+}
+
+footer {
+  color: var(--clr-main-fg);
+  background: var(--clr-main-dark);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-inline: min(5vw, 4rem);
+  padding-block: 3rem;
+
+  a {
+    text-decoration: underline;
+  }
+
+  nav ul {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+}
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  gap: 0.65rem;
+  font-weight: 700;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  transition: 300ms ease-in-out;
+  border: 3px solid var(--clr-primary);
+  color: var(--clr-primary);
+
+  &:hover {
+    background: var(--clr-primary);
+    color: var(--clr-primary-fg);
+  }
+
+  &.cta {
+    color: var(--clr-primary-fg);
+    background: var(--clr-primary);
+
+    &:hover {
+      background-position: right center;
+    }
+  }
+}
+
+
+#main {
+  min-height: calc(100dvh - var(--header-height));
+}
+
+
+/* Home Page */
+
+#hero {
+  display: flex;
+  justify-content: center;
+  padding-top: 8rem;
+  height: calc(100dvh - var(--header-height));
+  background: var(--clr-main-dark);
+  color: var(--clr-main-fg);
+  
+  h1 {
+    font-size: 5rem;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .button-group {
+    display: flex;
+    gap: 1.25rem;
+  }
+}
+
+
+/* About Page */
+
+.team-members {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+
+  .team-member {
+    text-align: center;
+    background: var(--clr-gray);
+    height: auto;
+
+    img {
+      height: 250px;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .team-member__name {
+      font-weight: 500;
+    }
+
+    .team-member__role {
+      color: var(--clr-dark-gray);
+      font-size: 1rem;
+    }
+
+    .team-member__email {
+      color: var(--clr-dark-gray);
+      font-size: 0.85rem;
+    }
+  }
+}
+
+.employee-of-the-month {
+  max-width: 200px;
+}

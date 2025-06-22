@@ -1,0 +1,61 @@
+{{define "title"}}{{.CompanyName}} | About{{end}}
+
+{{define "main"}}
+
+<section class="white">
+  <h1>About Us</h1>
+  <p>At {{.CompanyName}}, we believe in building the future through technology. Since our founding, we have been committed to delivering innovative, scalable solutions that help organizations stay ahead in a rapidly evolving digital landscape.</p>
+</section>
+
+<section class="gray center">
+  <p>We have a lot of expertise in what we do.</p>
+</section>
+
+<section class="white">
+  <h2>Our Dedicated Team</h2>
+  <p>Our team of dedicated Specialists and Engineers work tirelessly to deliver solutions that redefine what’s possible.</p>
+
+  <div class="team-members">
+    <div class="team-member">
+      <img src="static/employees/employee4.png" />
+      <p class="team-member__name">Jonathan Pierce</p>
+      <p class="team-member__role">Chief Executive Officer</p>
+      <p class="team-member__email">jonathan@{{.CompanyDomain}}</p>
+    </div>
+    <div class="team-member">
+      <img src="static/employees/employee5.png" />
+      <p class="team-member__name">Rachel N. Voss</p>
+      <p class="team-member__role">Chief Technology Officer</p>
+      <p class="team-member__email">rachel@{{.CompanyDomain}}</p>
+    </div>
+    <div class="team-member">
+      <img src="static/employees/employee2.png" />
+      <p class="team-member__name">{{.EmployeeName}}</p>
+      <p class="team-member__role">Chief Operations Officer</p>
+      <p class="team-member__email">{{.EmployeeEmail}}</p>
+    </div>
+    <div class="team-member">
+      <img src="static/employees/employee6.png" />
+      <p class="team-member__name">Leonard Grey</p>
+      <p class="team-member__role">IT Systems Administrator</p>
+      <p class="team-member__email">leonard@{{.CompanyDomain}}</p>
+    </div>
+    <div class="team-member">
+      <img src="static/employees/employee3.png" />
+      <p class="team-member__name">Alice Ellis</p>
+      <p class="team-member__role">Senior Backend Engineer</p>
+      <p class="team-member__email">alice@{{.CompanyDomain}}</p>
+    </div>
+  </div>
+</section>
+
+<section class="white">
+  <h2>This Months Employee</h2>
+  <p>This months employee is {{.EmployeeName}}. He has done a lot of great things for our customers.</p>
+  <img class="employee-of-the-month" src="static/employees/employee2.png" />
+  <blockquote>
+    "I might not be the best at IT, but I strive to do the best job I can." -{{.EmployeeName}}
+  </blockquote>
+</section>
+
+{{end}}

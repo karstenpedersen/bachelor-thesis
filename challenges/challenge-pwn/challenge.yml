@@ -1,0 +1,31 @@
+name: Pwnfish
+category: pwn
+description: |
+  Check out my cool fishing game! This is my first C program, so please tell me what you think.
+
+  To access the game, you must first connect to the system via SSH $SSH_SERVICE_INTERNAL_URL:8022 
+  The username is "gl" and the password is "hf".
+  Then you can access the game with "nc pwnfish 1337".
+type: container
+solution: |
+  Connect to remote pwnfish server through ssh server.
+  Leak stack canary using format string. (e.g. %13%p)
+  Leak known address (such as return address on stac), and calculate PIE base address.
+  Leak GOT entry, such as puts, and then calculate libc base address.
+  Construct payload for stack overflow.
+  Example payload: 
+    40 byte padding, 
+    canary, 
+    8 byte padding, 
+    pop rdi gadget
+    '/bin/sh' address,
+    ret gadget, 
+    system address.
+  The payload is sent to name a fish, and then show fish
+  to spawn a shell.
+  The flag can be read with "cat flag".
+
+flags:
+  - flag{d3_bait_4ble_s3cur1ty}
+
+value: 66

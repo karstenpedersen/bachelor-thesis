@@ -1,0 +1,24 @@
+name: maze
+category: misc
+description: 
+  You wake up in a dark maze and need to find a way out.
+  To begin, you must establish an SSH connection to the challenge environment. Instructions on how to do this are available at.  
+  https://ctf.jacopomauro.com/
+
+  connect whit ssh on port 8022. ssh username is "test" and password is "test" then Use netcat to access the maze gam.
+  nc chall 1337
+  Connection Details
+    -ssh_username="test" 
+    -ssh_password="test"
+    -REMOTE_HOST = "chall" 
+    -REMOTE_PORT = 1337
+
+type: container
+solution: 
+  To solve the challenge, the player must write a script that explores all possible paths in the maze using a Breadth-First Search (BFS) algorithm.
+  The script should generate all combinations of characters needed to traverse the maze,
+   sending input one character at a time to the game, until the correct path is found and the maze is completed.
+  
+flags:
+    - flag{ILoveFlags}
+value: 100

@@ -1,0 +1,58 @@
+services:
+  database:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=db
+    tmpfs:
+      - /var/lib/postgresql/data
+  web:
+    build: ./web
+    environment:
+      - PORT=3000
+      - NODE_ENV=development
+      - ADMIN_USERNAME=admin
+      - ADMIN_PASSWORD=password
+      - CTF_FLAG=myloveforflags
+      - DATABASE_URL=postgresql://postgres:postgres@database:5432/db
+    restart: unless-stopped
+    user: "node:node"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - database
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+  admin-user:
+    build: ./headless
+    restart: unless-stopped
+    user: "node:node"
+    environment:
+      - USERNAME=admin
+      - PASSWORD=password
+      - LOGIN_PAGE_URL=http://web:3000/login
+      - HOME_PAGE_URL=http://web:3000
+    depends_on:
+      - web
+    cap_add:
+      - SYS_ADMIN
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+  healtcheck:
+    build: ./healthcheck
+    environment:
+      - PORT=8080
+    ports:
+      - "${HTTP_PORT-127.0.0.1:8080}:8080"
+    restart: unless-stopped
+
+

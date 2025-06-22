@@ -1,0 +1,9 @@
+services:
+  pwn-solver:
+    build: .
+    network_mode: host
+    environment:
+      # DOMAIN: "localhost"
+      DOMAIN: "host.docker.internal"
+      SSH_PORT: 8022
+      SSH_SERVICE_INTERNAL_URL: "host.docker.internal"

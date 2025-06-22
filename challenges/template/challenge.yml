@@ -1,0 +1,11 @@
+name: web
+category: web
+description: A simple website
+type: container
+
+solution: Nagivate to the website to find the flag.
+
+flags:
+    - flag{web-example}
+
+value: 100

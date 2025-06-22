@@ -1,0 +1,83 @@
+:root {
+    --text-color: rgb(0, 0, 0);
+    --bar-color: #58a3f9;
+    --textwhite-color: white;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+    color: var(--textwhite-color);
+    padding-bottom: 50px;
+    background-image: url('../pictures/background.png');
+}
+
+h1 {
+    background-color: var(--bar-color);
+    color: white;
+    padding: 15px;
+    text-align: center;
+    margin: 0;
+}
+
+
+a {
+    color: var(--textwhite-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    background-color: var(--bar-color);
+    color: var(--textwhite-color);
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+
+.flight-entry {
+    border-bottom: #000000 solid 2px;
+    color: #000000;
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(5px);
+}
+
+.search-form {
+    max-width: 600px;
+    margin: 40px auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+
+.search-form input[type="text"] {
+    padding: 6px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.search-form input[type="submit"] {
+    padding: 6px 12px;
+    border-radius: 5px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+}
+
+.search-form input[type="submit"]:hover {
+    background-color: #0056b3;
+}

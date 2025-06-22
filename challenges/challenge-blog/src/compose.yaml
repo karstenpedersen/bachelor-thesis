@@ -1,0 +1,42 @@
+services:
+  nginx:
+    image: nginx:1.27
+    ports:
+      - "${HTTP_PORT-127.0.0.1:8080}:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - web1
+      - web2
+      - healthcheck
+    restart: unless-stopped
+
+  web1:
+    image: php:8-apache
+    volumes:
+      - ./web1:/var/www/html
+    environment:
+      WEB1URL: "http://web1.${DOMAIN}:8080"
+      WEB2URL: "http://web2.${DOMAIN}:8080"
+    restart: unless-stopped
+
+  web2:
+    image: php:8-apache
+    volumes:
+      - ./web2:/var/www/html
+
+    environment:
+      WEB1URL: "http://web1.${DOMAIN}:8080"
+      WEB2URL: "http://web2.${DOMAIN}:8080"
+    restart: unless-stopped
+
+  healthcheck:
+    build: ./healthcheck
+    environment:
+      - PORT=8080
+
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 128M

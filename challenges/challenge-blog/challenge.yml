@@ -1,0 +1,29 @@
+name: Exif Marks the Spot
+category: OSINT
+description: | 
+    The Professor went on a summer vacation and documented his journey on a personal blog. Your task is to figure out what flight he/she/it returns from the trip with.
+
+    you have access to the following
+        - A blog with travel posts, images, and subtle clues | https://blog.$DOMAIN
+        - A custom flight tracker that holds simulated flight data | https://flight-logs.$DOMAIN
+
+    Deduce the flight that brought him back to assess whether there is sufficient time left for you to access his office.
+    
+    The flag format follows - flag{IATACODE_FLIGHTNUMBER}. Example, flag{AMS_XX100}
+
+type: container
+
+solution: |
+
+    Navigate to the website at blog.$DOMAIN:8080.
+    Read through the website.
+    Download the correct picture.
+    Extract metadata.
+    Search with extract gps coordinates on maps.
+    Use found information on flight-logs.$DOMAIN:8080.
+    Craft flag with following format flag{$IATACODE_$FLIGHTNUMBER}.
+
+flags:
+    - flag{NRT_SK650}
+
+value: 102

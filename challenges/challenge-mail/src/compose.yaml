@@ -1,0 +1,104 @@
+x-common-env:
+  COMPANY_NAME: &COMPANY_NAME "Meridian Corp"
+  COMPANY_DOMAIN: &COMPANY_DOMAIN meridiancorp.com
+  COMPANY_EMPLOYEE_NAME: &COMPANY_EMPLOYEE_NAME John Black
+  COMPANY_EMPLOYEE_EMAIL: &COMPANY_EMPLOYEE_EMAIL john@meridiancorp.com
+  CTF_FLAG: &CTF_FLAG flag{elwood-edwards}
+
+services:
+  nginx:
+    build: ./nginx
+    ports:
+      - "${HTTP_PORT-127.0.0.1:8080}:8080"
+    depends_on:
+      - healthcheck
+      - company
+      - mailserver
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges
+    cap_drop:
+      - ALL
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+  openssh-server:
+    build: ./openssh-server
+    environment:
+      PUID: 1000
+      PGID: 1000
+      SUDO_ACCESS: false
+      PASSWORD_ACCESS: true
+      USER_NAME: gl
+      USER_PASSWORD: hf
+    ports:
+      - "${SSH_PORT-127.0.0.1:8022}:2222"
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+  mailserver:
+    build: ./mailserver
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges
+    cap_drop:
+      - ALL
+    read_only: true
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+  users:
+    build: ./users
+    environment:
+      MESSAGES_ENDPOINT: http://mailserver:8025/api/v2/messages
+      TARGET_EMPLOYEE_EMAIL: *COMPANY_EMPLOYEE_EMAIL
+      TARGET_EMPLOYEE_PASSWORD: *CTF_FLAG
+    depends_on:
+      - mailserver
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges
+    cap_drop:
+      - ALL
+    deploy:
+      resources:
+        limits:
+          memory: 2048M
+  company:
+    build: ./company
+    environment:
+      PORT: 3000
+      COMPANY_NAME: *COMPANY_NAME
+      COMPANY_DOMAIN: *COMPANY_DOMAIN
+      EMPLOYEE_NAME: *COMPANY_EMPLOYEE_NAME
+      EMPLOYEE_EMAIL: *COMPANY_EMPLOYEE_EMAIL
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges
+    cap_drop:
+      - ALL
+    read_only: true
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+  healthcheck:
+    build: ./healthcheck
+    environment:
+      PORT: 8000
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges
+    cap_drop:
+      - ALL
+    read_only: true
+    deploy:
+      resources:
+        limits:
+          memory: 256M

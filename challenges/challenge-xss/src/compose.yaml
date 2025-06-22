@@ -1,0 +1,91 @@
+services:
+  nginx:
+    image: nginx:1.27
+    ports:
+      - "${HTTP_PORT-127.0.0.1:8080}:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - web
+      - healthcheck
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 896M
+  openssh-server:
+    build: ./openssh
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - SUDO_ACCESS=false
+      - PASSWORD_ACCESS=true
+      - USER_NAME=gl
+      - USER_PASSWORD=hf
+    ports:
+      - "${SSH_PORT-127.0.0.1:8022}:2222"
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+  database:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=KB6fmNJ8Wt5wX7jtsg4nnAkr
+      - POSTGRES_PASSWORD=vMkentn24xDE6Q4dSXZ1C59m
+      - POSTGRES_DB=db
+    tmpfs:
+      - /var/lib/postgresql/data
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 1536M
+  web:
+    build: ./web
+    environment:
+      - PORT=3000
+      - NODE_ENV=development
+      - ADMIN_USERNAME=alice
+      - ADMIN_PASSWORD=backlands41afraid47spellbind14hug75cesarean58cuddly77decibel05scowling79chalice65brought6
+      - CTF_FLAG=flag{myloveforflags}
+      - DATABASE_URL=postgresql://KB6fmNJ8Wt5wX7jtsg4nnAkr:vMkentn24xDE6Q4dSXZ1C59m@database:5432/db
+    restart: unless-stopped
+    user: "node:node"
+    depends_on:
+      - database
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+  admin-user:
+    build: ./simulated-user
+    restart: unless-stopped
+    user: "node:node"
+    environment:
+      - USERNAME=alice
+      - PASSWORD=backlands41afraid47spellbind14hug75cesarean58cuddly77decibel05scowling79chalice65brought6
+      - LOGIN_PAGE_URL=http://web:3000/login
+    depends_on:
+      - web
+    cap_add:
+      - SYS_ADMIN
+    deploy:
+      resources:
+        limits:
+          memory: 1280M
+  healthcheck:
+    build: ./healthcheck
+    environment:
+      - PORT=8080
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+

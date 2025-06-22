@@ -1,0 +1,7 @@
+.direnv
+.cloudinit.pid
+*.zip
+*.qcow2
+out/
+.env
+.venv

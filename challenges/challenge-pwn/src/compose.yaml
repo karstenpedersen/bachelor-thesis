@@ -1,0 +1,38 @@
+services:
+  pwnfish:
+    image: "cybersecnatlab/challenge-jail@sha256:7bf77225063b039960f654307cf5d6f977f892ff548606357a2e8fe8067d0a88"
+    restart: unless-stopped
+    init: true
+    privileged: true
+    volumes:
+      - "./pwnfish/build/pwnfish:/home/user/chall:ro"
+      - "./pwnfish/libs:/home/user/libs:ro"
+    environment:
+      - "FLAG=flag{d3_bait_4ble_s3cur1ty}"
+      - "SET_INTERPRETER=/home/user/libs/ld-linux-x86-64.so.2"
+      - "SET_RPATH=/home/user/libs"
+  openssh-server:
+    build: ./openssh
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - SUDO_ACCESS=false
+      - PASSWORD_ACCESS=true
+      - USER_PASSWORD=hf
+      - USER_NAME=gl
+    ports:
+      - "${SSH_PORT-127.0.0.1:8022}:2222"
+    volumes:
+      - ./openssh/config:/custom-cont-init.d:ro
+    restart: unless-stopped
+  healthcheck:
+    build: ./healthcheck
+    ports:
+      - "${HTTP_PORT-127.0.0.1:8080}:8080"
+    environment:
+      - PORT=8080
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 128M

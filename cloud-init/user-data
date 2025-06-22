@@ -1,0 +1,10 @@
+#cloud-config
+password: password
+chpasswd:
+  expire: False
+runcmd:
+  - mkdir /run/challenge
+  - wget --no-check-certificate -O "/run/challenge/challenge.zip" "http://10.0.2.2:8000/challenge.zip"
+  - unzip -d "/run/challenge/challenge/" "/run/challenge/challenge.zip"
+  - HTTP_PORT="8080" HTTPS_PORT="8443" SSH_PORT="8022" DOMAIN="localhost" docker compose -f "/run/challenge/challenge/compose.yaml" up -d
+

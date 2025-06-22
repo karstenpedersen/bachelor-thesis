@@ -1,0 +1,17 @@
+name: You've Got Mail
+category: web
+description: |
+    You need to create and send a phishing email to an employee inside Meridian Corp. Their home page is at company.$DOMAIN. You have been given a screenshot of the email to recreate, and it should include an a-tag with a href that the employee can send a POST request too. The employee will look at it in 600x215 resolution. You can send emails to mailserver:1025 from $DOMAIN:8022, access using SSH with the username: gl and password: hf. You can access mail.$DOMAIN to see how the mails you send look. It might be a good idea to make the email seem urgent by putting urgent keywords in the its subject.
+type: container
+
+solution: |
+    Go to company.$DOMAIN:8080 and find the least tech-savvy employee.
+    SSH into $DOMAIN:8022 and start a HTTP server that accepts POST requests.
+    Recreate the given email and add the link to your HTTP server.
+    Send the email from the SSH server using mhsendmail at mailserver:1025.
+    If you have send the email to the correct employee and log out the body of the responses, then you should see the employee's login credentials.
+
+flags:
+    - flag{elwood-edwards}
+
+value: 100

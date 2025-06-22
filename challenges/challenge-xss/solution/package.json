@@ -1,0 +1,13 @@
+{
+  "name": "solver",
+  "type": "module",
+  "version": "1.0.0",
+  "main": "solver.js",
+  "scripts": {
+    "start": "node solver.js"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.2",
+    "node-ssh": "^13.2.1"
+  }
+}

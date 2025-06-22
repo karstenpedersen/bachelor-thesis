@@ -1,0 +1,20 @@
+name: Chirper
+category: Web Security
+description: "Take a look at my very cool website: web.$DOMAIN:8080. I check it often, as I like to read what you post. Also take a look here: $DOMAIN:8022, access it with username: gl and password: hf."
+type: container
+
+solution: |
+    Nagivate to the website at web.$DOMAIN:8080.
+    Create a new account.
+    Find out that you can do XSS.
+    SSH into $SSH_SERVICE_INTERNAL_URL:8022 and setup an HTTP server.
+    Create post that sends other users cookies to HTTP server.
+    Wait for JWT tokens to appear in HTTP server.
+    Copy JWT token and paste it into the browser.
+    Go to drafts page.
+    Find flag on the format flag{.*}.
+
+flags:
+    - flag{myloveforflags}
+
+value: 100
