@@ -1,4 +1,4 @@
-# badm500-project
+# bachelor-thesis
 
 Bachelor thesis project for the [BADM500 course](https://odin.sdu.dk/sitecore/index.php?a=searchfagbesk&internkode=badm500&lang=en) (2025) at the [University of Southern Denmark](https://www.sdu.dk/en), [Department of Mathematics and Computer Science](https://www.sdu.dk/en/om-sdu/institutter-centre/imada_matematik_og_datalogi).
 
