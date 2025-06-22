@@ -1,0 +1,117 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[a4paper,margin=2.4cm]{geometry} \linespread{1.25} 
+\usepackage[english]{babel}
+
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[page,toc]{appendix}
+\usepackage{fancyhdr}
+\usepackage{fancyvrb}
+\usepackage[T1]{fontenc}	
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage{titlesec}
+\usepackage[colorlinks=true, linkcolor=black, urlcolor=blue, citecolor=black]{hyperref}
+\usepackage{listing}
+\usepackage{minted}
+\setlength{\marginparwidth}{2cm}
+\usepackage{todonotes}
+\usepackage{enumitem}
+
+\setlist[itemize]{noitemsep}
+
+% Stop indenting paragraphs
+% \setlength{\parindent}{0pt}
+
+\usepackage{float}
+\usepackage{xcolor}
+\definecolor{bg}{rgb}{0.95, 0.95, 0.95}
+\definecolor{inbg}{rgb}{0.5, 1, 1}
+\setminted[]{linenos, frame=leftline,breaklines, bgcolor=bg}
+\usemintedstyle{xcode}
+\newmintinline{gas}{bgcolor=bg}
+\usepackage{csquotes}
+
+% Bib
+\usepackage[style=numeric,backend=biber]{biblatex}
+\addbibresource{bibliography.bib}
+
+\usepackage{lastpage}
+
+\DeclareGraphicsExtensions{.png}	\graphicspath{{img/}}               
+\renewcommand{\arraystretch}{1.15}
+
+
+%%%%%%%%%%%%%%%%%% custom commands %%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\code}[1]{\texttt{#1}}
+
+% Skriv beskeder til hinanden i dokumentet
+\newcommand{\yannick}[1]{%   
+\todo[author=Esben,inline,color=blue!25]{#1}}
+\newcommand{\karsten}[1]{%   
+\todo[author=Karsten,inline,color=red!25]{#1}}
+\newcommand{\esben}[1]{%   
+\todo[author=Esben,inline,color=green!25]{#1}}
+\newcommand{\tobias}[1]{%   
+\todo[author=Tobias,inline,color=yellow!25]{#1}}
+
+
+\begin{document}
+
+% Style
+\pagenumbering{gobble}
+\pagestyle{fancy}
+\lhead{Group III}
+\chead{BADM500}
+\rhead{June 1, 2025}
+\setlength{\headheight}{15pt}
+
+
+% Frontmatter
+\include{titlepage}
+% \include{resume}
+\include{contents}
+
+\pagenumbering{arabic}
+\lfoot{}
+\cfoot{}
+\rfoot{\thepage{}/\pageref{LastPage}}
+% \fancyfoot[R]{\thepage/\pageref{LastPage}}
+
+% Intro
+\input{introduction}
+\input{preliminaries}
+
+% Challenges
+\include{challenges/challenge-xss}
+\include{challenges/challenge-maze}
+\include{challenges/challenge-mail}
+\include{challenges/challenge-pwn}
+\include{challenges/challenge-osint}
+
+% End
+\input{team-work-description}
+\input{discussion}
+\input{conclusion}
+
+% Backmatter
+\newpage
+\printbibliography[
+  heading=bibintoc
+]
+
+% Appendix
+\newpage
+\appendix
+\input{appendix/xss-appendix}
+\input{appendix/maze-appendix}
+\input{appendix/mail-appendix}
+\input{appendix/pwn-appendix}
+\input{appendix/blog-appendix}
+
+% \newpage
+% \pagenumbering{gobble} % Stop numbering pages
+% \rfoot{} % Remove page number from footer
+
+\end{document}

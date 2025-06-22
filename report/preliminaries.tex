@@ -1,0 +1,35 @@
+\section{Preliminaries}\label{sec:preliminaries}
+
+% If you have used not well-known tools or libraries, briefly introduce them. Provide references to what you have used.
+
+Throughout this project, we have used knowledge about cybersecurity, computer science, and tools and libraries. The most important preliminaries are introduced in this section.
+
+\subsection{Chromium}
+
+To simulate user activity on websites, we have used libraries like Puppeteer\cite{github__puppeteer} (version 24.3.0) and go-rod\cite{github__go_rod} (version v0.116.2), which use Chromium\cite{chromium} to interact with websites. This makes it possible to navigate to pages, take screenshots, and maintain cookies programmatically.
+
+\subsection{Pwntools}
+To interact with challenges remotely, we will use the \code{pwntools}\cite{github__pwntools} library (version 4.12.0) for Python. It is used in the automated solvers to remotely connect to challenges and interact with them.
+
+\subsection{CTF Platform Limitations}
+Our CTF challenges will run on the CTF platform\cite{ctf_platform} provided by our supervisor, Jacopo Mauro. At the time of writing this report, the hosted platform has a few limitations that we need to adhere to. The upload limit for challenges is set to 10 MB, and each challenge will have 4 GB RAM available when running. Additionally, the platform limits how participants can interact with it, exposing only ports for HTTPS and SSH traffic. Therefore, the "Chirper", "Maze Game", "You've Got Mail", and "Pwnfish" challenges rely on an auxiliary SSH service, to which participants can connect, and from there access the challenge environment.
+
+% \todo[inline]{Perhaps we can also explain the need for a health check in this section?}
+
+\subsection{Challenge Hardening}
+
+% A container can never be perfectly safe.
+% Hardening a container minimizes its attack surface, making it more secure.
+% https://www.rapidfort.com/blog/what-is-container-hardening
+
+Challenges are run in isolation on the CTF platform, but we still need to minimize vulnerabilities inside of them. Since our challenges are built as containerized services using Docker and Docker Compose, there are several strategies we can utilize. We can minimize our images by selecting minimal base images, like Alpine, and using multi-stage builds to reduce the final image size. We have not done this fully for all challenges, as we focused on implementing and refining them.
+
+\subsection{Healthcheck Endpoints}
+
+On the CTF platform, a healthcheck endpoint is used to check whether challenges are ready. When the endpoint can be reached and returns a status code 200, then the CTF platform marks it as ready. We have created a separate service in all our challenges for this purpose. This was done to keep the functionality apart from the challenges themselves, as they differ in how they are structured. Some don't have websites, and some use subdomains.
+
+\subsection{AI Usage}
+
+We have used ChatGPT for the blog and mail challenge. We have used it to generate fake images of people and locations, as well as content for our websites, like filler paragraphs and flight data.
+While writing our bachelor's thesis, Grammarly was used to assist with spell checking and grammar.
+

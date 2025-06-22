@@ -1,0 +1,34 @@
+\section{Discussion}\label{sec:discussion}
+
+% \todo[inline]{We can mention what we think is important. Hard things we encountered, improvements to our challenges, the future}
+
+% Summarize the learning experience and insights gained from creating these challenges.
+
+This project has taught us about gamifying and conveying computer science and cybersecurity subjects, particularly through Jeopardy-style CTFs. We have set up various systems, including websites, databases, SMTP endpoints, and have gained a deeper understanding of Linux, Docker, and NGINX, which have been utilized to configure the challenges.
+
+% Discuss any potential improvements or enhancements that could be made to the challenges.
+
+For our first challenge, "Chirper", we did not properly consider the restrictions of the CTF platform. We used a PostgreSQL database, but it might make more sense to use SQLite or an in-memory database to minimize the amount of resources needed to run the challenge. Another thing that can be improved here is its solution. When signing in and creating the XSS post, we just use \texttt{fetch} to make requests. Here, it could make sense to use Puppeteer instead, as this would simulate how the user would interact with the frontend of the website, and thereby check that the input forms are accessible. We attempted this approach at first, but it proved unreliable in practice. We may be able to remedy this had we been able to spend more time on the solution.
+
+The "You've Got Mail" challenge ended up being a bit short. The player has to host an HTTP server, recreate the phishing email, and send it. We can make it longer in several ways. If we want to focus on HTML and CSS and creating a believable attack, the player could link to an HTML page with a login form. This would then also be validated. Another direction we could take is to create a successor challenge, where we make it harder by securing the mail server. Right now, there is no security on the actual mail server, as anyone can send emails to the SMTP endpoint.
+
+The "Maze Game" challenge could be improved in the following way: It currently prints a lot to the screen when the user provides input, and these write operations are slow. To optimize this, we could build an entirely new version of the game that isn't text-based, in order to avoid having so many print operations.
+
+The "Pwnfish" challenge presents a clear opportunity for further development, as already mentioned. Despite the fact that the challenge has been successfully verified, there is an error which, as far as we can tell, never should have allowed the automated solver to work. During continued work, we want to focus on fixing this issue, and also uncovering the reason why it worked originally. As stated, the problem could be fixed by using a different version of glibc, or using a different function to introduce the buffer overflow which does not terminate on whitespace characters. We learned quite a bit about low level security, and how to exploit binaries while developing this challenge, and there are many possible ways to expand it in the future. We have demonstrated that common modern security protections can be bypassed by abusing some fairly blatant programming mistakes. There are more subtle vulnerabilities that can be abused to take control of a program. Most notable would be the wide variety of heap exploitation techniques, such as use-after-free or double-free, which are typically harder to diagnose compared to buffer overflows and especially format string vulnerabilities. Replacing the current stack-based vulnerabilities with heap-based ones is quite realistic, since the program already uses heap-memory to store the caught fish.
+Another consideration is that we currently use \code{scanf} insecurely in several places. One could argue that it would be better to just misuse it once, thus making the intended exploit clearer. Instead, we wanted to simulate a situation where the programmer is unaware of the danger of \code{scanf}, and therefore uses it everywhere.
+
+% Since we use the heap to store the linked list of fish, it would be very natural to iterate on the challenge in the future to require heap-based exploitation techniques instead of the current vulnerabilities. This would make the challenge even harder and the vulnerabilities more realistic.
+
+% Future improvements:
+
+% \todo{TODO}
+
+The "Exif Marks the Spot" challenge met its intended goals, but some improvements could still be made to enhance the player experience and the technical depth.
+Instead of hardcoding the EXIF data, we could have dynamically generated the metadata using scripts when the challenge starts, which could have increased reusability. So instead of having a hard-coded date of summer 2024. It could have been made so it was in response to when the player is playing the challenge, such as June 2025. This could also reduce walkthrough reuse, so other players couldn't just get the answer from another source.
+In general, the front-end design was also kept minimal. This could have been changed to have a better aesthetic or uphold Jakob Nielsen's 10 Heuristics\cite{JakobNielsen10Heuristic} for a better user experience.
+Another thing we could have worked more upon would be to add more layers of OSINT that the player should have had to go through, which in turn would deepen the educational value that the players would have gotten, such as playing around with social media profiles or experimenting with steganography.
+Overall, we believe that the challenge lays a strong foundation for a beginner-friendly OSINT task, but with some additional refinements, it could evolve into a more robust and scalable learning experience. 
+
+% Discuss what are the shortcomings/limitations of your project, possibly explaining how they could be solved or mitigated.
+
+If the challenges were to be hosted on the CTF platform in the future, we would need to do some different things. We need to focus more on challenge hardening, as this is lacking in some challenges due to time restrictions. After this, it could make sense to let other people try out the challenges. Especially people who fit our target groups. This would give us feedback on how intuitive they are, and if the difficulties fit with what we expect them to be. Here we could record the participants to see how they overcome the different challenges. We could at the end also gather information through interviews on what they liked or disliked and how difficult they were.

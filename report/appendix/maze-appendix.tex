@@ -1,0 +1,59 @@
+\section{Maze Game Appendix}
+
+\subsection{Connect to SSH using \texttt{SSHTunnelForwarder}}\label{apx:SSHTunnelForwarder_maze}
+
+\begin{minted}[linenos]{python}
+SSH_DOMAIN = os.environ["SSH_SERVICE_INTERNAL_URL"]
+SSH_PORT = int(os.environ["SSH_PORT"])
+
+REMOTE_HOST = "chall"
+REMOTE_PORT = 1337
+
+LOCAL_HOST = "127.0.0.1"
+LOCAL_PORT = 3242
+
+server = SSHTunnelForwarder(
+    (SSH_DOMAIN, SSH_PORT),
+    ssh_username="test",
+    ssh_password="test",
+    allow_agent=False,
+    host_pkey_directories=None, 
+    remote_bind_address=(REMOTE_HOST, REMOTE_PORT),
+    local_bind_address=(LOCAL_HOST, LOCAL_PORT),
+)
+\end{minted}
+\begin{listing}[H]
+    \caption{Connect to SSH using \texttt{SSHTunnelForwarder}}
+    \label{lst:SSHTunnelForwarder_maze}
+\end{listing}
+
+\subsection{Maze Game Solver}\label{apx:maze-solver}
+
+\begin{minted}[linenos]{python}
+def solver(host, port) -> None:
+    """runs and completes the maze game"""
+    p = remote(host, port)
+    length = 12
+    flag = None
+    i=0
+    pathe = BFS(length)
+    pathe_length  = len(pathe)
+    while flag == None:
+        move = pathe[i]
+        p.sendline(move)
+        i=i+1
+        if i == pathe_length :
+            i=0 
+            length = length+2
+            pathe = BFS(length)
+            pathe_length = len(pathe)
+        flag = re.search("flag{.*}",f"{p.recv()}")
+    print("Flag has been found")
+    with open("/run/solution/flag.txt", "w") as f:
+        f.write(flag[0])
+    return
+\end{minted}
+\begin{listing}[H]
+    \caption{Maze Game solver}
+    \label{lst:maze-solver}
+\end{listing}
